@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Time Zones</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .time-container {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <h2>Welcome to World Time Zones</h2>
+  <button onclick="showTime()">Show Time</button>
+  <div class="time-container" id="timeDisplay"></div>
+
+  <script>
+    function showTime() {
+      var timeDisplay = document.getElementById('timeDisplay');
+      var currentTime = new Date();
+
+      // Time in each location, starting at 3 AM in the first location
+      var locations = [
+        { city: 'Location A', offset: 0 },   // 3 AM
+        { city: 'Location B', offset: 3 },   // 6 AM
+        { city: 'Location C', offset: 6 },   // 9 AM
+        { city: 'Location D', offset: 9 },   // 12 PM
+        { city: 'Location E', offset: 12 },  // 3 PM
+        { city: 'Location F', offset: 15 }   // 6 PM
+      ];
+
+      var timeHTML = '<h3>Current Times:</h3>';
+      locations.forEach(function(location) {
+        var time = new Date(currentTime.getTime() + (location.offset * 60 * 60 * 1000));
+        var hours = time.getHours().toString().padStart(2, '0');
+        var minutes = time.getMinutes().toString().padStart(2, '0');
+        var locationTime = hours + ':' + minutes;
+        timeHTML += '<p>' + location.city + ': ' + locationTime + '</p>';
+      });
+
+      timeDisplay.innerHTML = timeHTML;
+    }
+  </script>
+</body>
+</html>
